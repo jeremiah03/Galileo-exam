@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Javascript 3.A</title>
+    </head>
+
+    <body>
+        <div id="data">
+            <p>Original string: TheQuickBrownFoxJumpOverTheLazyDog</p>
+            <p id="paragraph"></p>
+        </div>
+    </body>
+    <script>
+        var string = "TheQuickBrownFoxJumpOverTheLazyDog";
+
+        var spcword = (string) => {
+            return string.split(/([A-Z]+[a-z]+)/).join(" ").trim();
+        }
+
+        var ucword = (string) => {
+            if (typeof string !== 'string') return '';
+
+            var newString = string.toLowerCase();
+            return newString.charAt(0).toUpperCase() + newString.slice(1);
+        }
+
+        string = spcword(string);
+        string = ucword(string);
+
+        console.log("String", string);
+
+        document.getElementById("paragraph").innerHTML = "Transformed string: " + string;
+    </script>
+
+</html>

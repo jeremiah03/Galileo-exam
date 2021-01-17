@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Contact Form</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous">
+        </script>
+    </head>
+
+    <body class="my-2">
+        <div class="container">
+            <h2>Contact form</h2>
+            <form action="#">
+
+                <div class="form-group">
+                    <label for="first_name">First name</label>
+                    <input type="text" name="first_name" id="first_name" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label for="last_name">Last name</label>
+                    <input type="text" name="last_name" id="last_name" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label for="birth_date">Birth Date</label>
+                    <input type="date" name="birth_date" id="birth_date" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Gender </label>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="radio" class="form-check-input" name="gender" id="gender_male" value="male">
+                            Male
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="radio" class="form-check-input" name="gender" id="gender_female"
+                                value="female">
+                            Female
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Languages: </label>
+
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" name="languages" id="languages_english"
+                                value="English">
+                            English
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" name="languages" id="languages_japanese"
+                                value="Japanese">
+                            Japanese
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" name="languages" id="languages_chinese"
+                                value="Chinese">
+                            Chinese
+                        </label>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </body>
+    <script>
+        getData();
+        function getData() {
+            return fetch('https://api.mocki.io/v1/f8bded8f')
+            .then(response => response.json())
+            .then(data => {
+                var data1 = data.employees[0];
+                document.getElementById('first_name').value = data1.firstName;
+                document.getElementById('last_name').value = data1.lastName;
+                document.getElementById('birth_date').value = data1.birthday;
+                if (data1.gender.male) {
+                    document.getElementById('gender_male').setAttribute('checked', true);
+                } else {
+                    document.getElementById('gender_female').setAttribute('checked', true);
+                }
+                var chkbox = document.getElementsByName('languages');
+                data1.knownLanguage.map((element, index) => {
+                    if(chkbox[index].value == element){
+                        chkbox[index].setAttribute('checked', true);
+                    }
+                });
+            });
+        }
+    </script>
+
+</html>
